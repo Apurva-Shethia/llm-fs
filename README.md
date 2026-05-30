@@ -30,16 +30,15 @@ The assistant reads configuration from environment variables:
 - FILE_ASSISTANT_MAX_BYTES: Maximum file size allowed for reads. Default: 5000000.
 - FILE_ASSISTANT_MAX_CHARS: Maximum characters returned by read_file. Default: 200000.
 - LLM_TOOL_MAX_CALLS: Max tool-call iterations per query. Default: 6.
-- OPENAI_API_KEY: API key for OpenAI.
-- OPENAI_MODEL: OpenAI model name. Default: gpt-4o-mini.
-- LLM_PROVIDER: Provider name. Currently only "openai" is supported.
+- GEMINI_API_KEY: API key for Google Gemini.
+- GEMINI_MODEL: Gemini model name. Default: gemini-2.5-flash.
 
 Example:
 
 ```bash
 export FILE_ASSISTANT_BASE_DIR=/path/to/project
-export OPENAI_API_KEY=your_key_here
-export OPENAI_MODEL=gpt-4o-mini
+export GEMINI_API_KEY=your_key_here
+export GEMINI_MODEL=gemini-2.5-flash
 ```
 
 Using the example env file (recommended if you have many flags):
@@ -54,14 +53,14 @@ The CLI loads .env automatically on startup (via python-dotenv).
 Run the CLI with a natural language query:
 
 ```bash
-python llm_file_assistant.py "Read all resumes in the resumes folder"
+.venv/bin/python llm_file_assistant.py "Read all resumes in the samples folder"
 ```
 
 Other examples:
 
 ```bash
-python llm_file_assistant.py "Find resumes mentioning Python experience"
-python llm_file_assistant.py "Create a summary file for resume_john_doe.pdf"
+.venv/bin/python llm_file_assistant.py "Find resumes mentioning cashier"
+.venv/bin/python llm_file_assistant.py "Create a summary file for samples/resume_009.docx"
 ```
 
 ## Tool Behavior Notes

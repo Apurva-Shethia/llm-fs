@@ -10,9 +10,11 @@ from dotenv import load_dotenv
 load_dotenv()
 
 try:
-    from openai import OpenAI
+    from google import genai
+    from google.genai import types
 except Exception:  # pragma: no cover - optional dependency
-    OpenAI = None
+    genai = None
+    types = None
 
 
 ToolResult = Dict[str, Any]
@@ -133,39 +135,72 @@ def _call_tool(name: str, args: Dict[str, Any]) -> ToolResult:
     return {"success": False, "error": f"Unknown tool: {name}"}
 
 
-def _parse_arguments(raw_arguments: str) -> Dict[str, Any]:
-    if not raw_arguments:
-        return {}
-    try:
-        parsed = json.loads(raw_arguments)
-    except json.JSONDecodeError as exc:
-        return {"__parse_error__": f"Invalid JSON arguments: {exc.msg}"}
-    if not isinstance(parsed, dict):
-        return {"__parse_error__": "Arguments must be a JSON object"}
-    return parsed
+DEFAULT_MODEL = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
 
 
-class OpenAIProvider:
+def _dict_to_schema(d: Dict[str, Any]) -> types.Schema:
+    if types is None:
+        raise RuntimeError("google-genai package not installed")
+    properties = {}
+    if "properties" in d:
+        for k, v in d["properties"].items():
+            properties[k] = _dict_to_schema(v)
+    items = None
+    if "items" in d:
+        items = _dict_to_schema(d["items"])
+    return types.Schema(
+        type=d.get("type", "string").upper(),
+        description=d.get("description"),
+        properties=properties or None,
+        required=d.get("required"),
+        items=items,
+        enum=d.get("enum"),
+    )
+
+
+def _function_declarations() -> List[types.FunctionDeclaration]:
+    if types is None:
+        raise RuntimeError("google-genai package not installed")
+    schemas = _tool_schemas()
+    declarations = []
+    for s in schemas:
+        func_schema = s["function"]
+        declarations.append(
+            types.FunctionDeclaration(
+                name=func_schema["name"],
+                description=func_schema["description"],
+                parameters=_dict_to_schema(func_schema["parameters"])
+            )
+        )
+    return declarations
+
+
+def _tool_config() -> types.GenerateContentConfig:
+    if types is None:
+        raise RuntimeError("google-genai package not installed")
+    return types.GenerateContentConfig(
+        system_instruction=_system_prompt(),
+        tools=[types.Tool(function_declarations=_function_declarations())],
+    )
+
+
+class GeminiProvider:
     def __init__(self, model: Optional[str] = None) -> None:
-        if OpenAI is None:
-            raise RuntimeError("openai package not installed")
-        self.client = OpenAI()
-        self.model = model or os.getenv("OPENAI_MODEL", "gpt-4o-mini")
+        if genai is None or types is None:
+            raise RuntimeError("google-genai package not installed")
+        self.client = genai.Client()
+        self.model = model or DEFAULT_MODEL
 
-    def chat(self, messages: List[Dict[str, Any]], tools: List[Dict[str, Any]]) -> Any:
-        return self.client.chat.completions.create(
+    def generate(self, contents: List[Any]) -> Any:
+        return self.client.models.generate_content(
             model=self.model,
-            messages=messages,
-            tools=tools,
-            tool_choice="auto",
+            contents=contents,
+            config=_tool_config(),
         )
 
 
-def load_provider() -> OpenAIProvider:
-    provider_name = os.getenv("LLM_PROVIDER", "openai").lower()
-    if provider_name == "openai":
-        return OpenAIProvider()
-    raise RuntimeError(f"Unsupported provider: {provider_name}")
+def load_provider() -> GeminiProvider:
+    return GeminiProvider()
 
 
 def _system_prompt() -> str:
@@ -179,59 +214,60 @@ def _system_prompt() -> str:
 
 
 class LLMFileAssistant:
-    def __init__(self, provider: Optional[OpenAIProvider] = None) -> None:
+    def __init__(self, provider: Optional[GeminiProvider] = None) -> None:
         self.provider = provider or load_provider()
-        self.tools = _tool_schemas()
 
     def run(self, user_query: str) -> Dict[str, Any]:
-        messages: List[Dict[str, Any]] = [
-            {"role": "system", "content": _system_prompt()},
-            {"role": "user", "content": user_query},
-        ]
-
+        contents: List[Any] = [user_query]
         tool_results: List[Dict[str, Any]] = []
         try:
             for _ in range(MAX_TOOL_CALLS):
-                response = self.provider.chat(messages, self.tools)
-                message = response.choices[0].message
-                tool_calls = getattr(message, "tool_calls", None) or []
-                assistant_payload: Dict[str, Any] = {
-                    "role": "assistant",
-                    "content": message.content or "",
-                }
-                if tool_calls:
-                    assistant_payload["tool_calls"] = [
-                        {
-                            "id": tool_call.id,
-                            "type": "function",
-                            "function": {
-                                "name": tool_call.function.name,
-                                "arguments": tool_call.function.arguments,
-                            },
-                        }
-                        for tool_call in tool_calls
-                    ]
-                messages.append(assistant_payload)
+                response = self.provider.generate(contents)
+                candidates = getattr(response, "candidates", None) or []
+                if not candidates:
+                    return {
+                        "success": False,
+                        "error": "No response candidates",
+                        "tool_calls": tool_results,
+                    }
+                content = candidates[0].content
+                contents.append(content)
 
-                if not tool_calls:
+                # Extract function calls from the model's response
+                function_calls = []
+                parts = getattr(content, "parts", None) or []
+                for part in parts:
+                    function_call = getattr(part, "function_call", None)
+                    if function_call:
+                        function_calls.append(function_call)
+
+                if not function_calls:
+                    # Check if there is text in the content
+                    text_parts = [part.text for part in parts if getattr(part, "text", None)]
+                    response_text = "\n".join(text_parts).strip() if text_parts else ""
                     return {
                         "success": True,
-                        "response": message.content or "",
+                        "response": response_text,
                         "tool_calls": tool_results,
                     }
 
-                for tool_call in tool_calls:
-                    name = tool_call.function.name
-                    args = _parse_arguments(tool_call.function.arguments)
+                # Execute function calls and gather responses
+                response_parts = []
+                for function_call in function_calls:
+                    name = function_call.name
+                    args = function_call.args if isinstance(function_call.args, dict) else {}
                     result = _call_tool(name, args)
                     tool_results.append({"name": name, "arguments": args, "result": result})
-                    messages.append(
-                        {
-                            "role": "tool",
-                            "tool_call_id": tool_call.id,
-                            "content": json.dumps(result, ensure_ascii=True),
-                        }
-                    )
+
+                    fc_id = getattr(function_call, "id", None)
+                    if fc_id:
+                        part = types.Part.from_function_response(name=name, response=result, id=fc_id)
+                    else:
+                        part = types.Part.from_function_response(name=name, response=result)
+                    response_parts.append(part)
+
+                contents.append(types.Content(role="tool", parts=response_parts))
+
         except Exception as exc:
             return {"success": False, "error": str(exc), "tool_calls": tool_results}
 

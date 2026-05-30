@@ -13,6 +13,7 @@ A small Python project that lets an LLM read, search, and write resume files usi
 - fs_tools.py: File system tools (read, list, search, write)
 - llm_file_assistant.py: LLM tool-calling assistant and CLI
 - requirements.txt: Runtime dependencies
+- .env.example: Example environment variable file
 
 ## Setup
 1. Create and activate a virtual environment (optional but recommended).
@@ -40,6 +41,17 @@ export FILE_ASSISTANT_BASE_DIR=/path/to/project
 export OPENAI_API_KEY=your_key_here
 export OPENAI_MODEL=gpt-4o-mini
 ```
+
+Using the example env file (recommended if you have many flags):
+
+```bash
+cp .env.example .env
+set -a
+source .env
+set +a
+```
+
+Note: .env is not loaded automatically. You must source it before running the CLI.
 
 ## Usage
 Run the CLI with a natural language query:

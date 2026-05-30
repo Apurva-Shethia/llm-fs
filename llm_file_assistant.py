@@ -5,6 +5,9 @@ import os
 from typing import Any, Dict, List, Optional
 
 from fs_tools import list_files, read_file, search_in_file, write_file
+from dotenv import load_dotenv
+
+load_dotenv()
 
 try:
     from openai import OpenAI

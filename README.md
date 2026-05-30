@@ -46,12 +46,9 @@ Using the example env file (recommended if you have many flags):
 
 ```bash
 cp .env.example .env
-set -a
-source .env
-set +a
 ```
 
-Note: .env is not loaded automatically. You must source it before running the CLI.
+The CLI loads .env automatically on startup (via python-dotenv).
 
 ## Usage
 Run the CLI with a natural language query:

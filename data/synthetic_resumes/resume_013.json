@@ -1,0 +1,28 @@
+{
+  "id": "resume_013",
+  "name": "Rachel Martinez",
+  "email": "rachel.martinez@email.com",
+  "location": "San Francisco",
+  "experience_years": 1,
+  "skills": [
+    "Go",
+    "Terraform",
+    "Java",
+    "Jenkins",
+    "MySQL",
+    "FastAPI"
+  ],
+  "education": [
+    "PhD Computer Science",
+    "PhD Computer Science"
+  ],
+  "work_history": [
+    {
+      "title": "Full-Stack Developer",
+      "company": "Notion",
+      "start_year": 2024,
+      "end_year": 2025,
+      "description": "Developed, maintained, and improved production systems. Collaborated with cross-functional teams. Led projects."
+    }
+  ]
+}

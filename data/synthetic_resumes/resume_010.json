@@ -1,0 +1,47 @@
+{
+  "id": "resume_010",
+  "name": "Olivia Miller",
+  "email": "olivia.miller@email.com",
+  "location": "Seattle",
+  "experience_years": 15,
+  "skills": [
+    "Terraform",
+    "Spring Boot",
+    "Azure",
+    "PostgreSQL"
+  ],
+  "education": [
+    "BS Computer Science",
+    "MS Electrical Engineering"
+  ],
+  "work_history": [
+    {
+      "title": "Senior Backend Engineer",
+      "company": "Twitter",
+      "start_year": 2022,
+      "end_year": 2024,
+      "description": "Collaborated with cross-functional teams. Optimized performance."
+    },
+    {
+      "title": "Senior Backend Engineer",
+      "company": "Meta",
+      "start_year": 2020,
+      "end_year": 2021,
+      "description": "Collaborated with cross-functional teams. Led projects."
+    },
+    {
+      "title": "Full-Stack Developer",
+      "company": "Apple",
+      "start_year": 2012,
+      "end_year": 2016,
+      "description": "Developed, maintained, and improved production systems. Collaborated with cross-functional teams. Mentored junior engineers."
+    },
+    {
+      "title": "Machine Learning Engineer",
+      "company": "Meta",
+      "start_year": 2010,
+      "end_year": 2011,
+      "description": "Developed, maintained, and improved production systems. Collaborated with cross-functional teams. Mentored junior engineers."
+    }
+  ]
+}

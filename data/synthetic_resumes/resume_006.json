@@ -1,0 +1,37 @@
+{
+  "id": "resume_006",
+  "name": "Wendy Wang",
+  "email": "wendy.wang@email.com",
+  "location": "Denver",
+  "experience_years": 8,
+  "skills": [
+    "Python",
+    "MySQL"
+  ],
+  "education": [
+    "BS Physics"
+  ],
+  "work_history": [
+    {
+      "title": "Senior Backend Engineer",
+      "company": "Stripe",
+      "start_year": 2022,
+      "end_year": 2024,
+      "description": "Collaborated with cross-functional teams. Led projects."
+    },
+    {
+      "title": "Machine Learning Engineer",
+      "company": "Uber",
+      "start_year": 2020,
+      "end_year": 2021,
+      "description": "Collaborated with cross-functional teams. Led projects."
+    },
+    {
+      "title": "Full-Stack Developer",
+      "company": "Google",
+      "start_year": 2018,
+      "end_year": 2019,
+      "description": "Developed, maintained, and improved production systems. Collaborated with cross-functional teams. Mentored junior engineers."
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "id": "resume_025",
+  "name": "Iris Brown",
+  "email": "iris.brown@email.com",
+  "location": "Chicago",
+  "experience_years": 2,
+  "skills": [
+    "Docker",
+    "AWS",
+    "Java",
+    "GCP",
+    "Node.js",
+    "Jenkins",
+    "MySQL"
+  ],
+  "education": [
+    "BS Mathematics"
+  ],
+  "work_history": [
+    {
+      "title": "Machine Learning Engineer",
+      "company": "Twitter",
+      "start_year": 2022,
+      "end_year": 2024,
+      "description": "Developed, maintained, and improved production systems. Collaborated with cross-functional teams. Optimized performance."
+    }
+  ]
+}

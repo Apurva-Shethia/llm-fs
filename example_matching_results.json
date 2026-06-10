@@ -1,0 +1,142 @@
+{
+  "job_description": "Google - Machine Learning Engineer",
+  "job_id": "jd_01",
+  "search_timestamp": "2026-06-10T17:45:14",
+  "top_matches": [
+    {
+      "candidate_name": "Bob Kumar",
+      "resume_path": "data/synthetic_resumes/bob_kumar.json",
+      "match_score": 46,
+      "matched_skills": [
+        "Python",
+        "AWS",
+        "Java",
+        "GCP",
+        "Kubernetes"
+      ],
+      "relevant_excerpts": [
+        "Work Experience:\n\nMachine Learning Engineer at Uber (2024-2025)\nDeveloped, maintained, and improved production systems. Collaborated with cross-functi...",
+        "Work Experience:\n\nSenior Backend Engineer at Apple (2018-2022)\nDeveloped, maintained, and improved production systems. Collaborated with cross-functio..."
+      ],
+      "reasoning": "Strong match in work experience. 15+ years experience (required 6+). Meets: 6+ years of software development experience."
+    },
+    {
+      "candidate_name": "Kate Rodriguez",
+      "resume_path": "data/synthetic_resumes/kate_rodriguez.json",
+      "match_score": 46,
+      "matched_skills": [
+        "Next.js",
+        "Svelte",
+        "Node.js",
+        "PostgreSQL",
+        "React"
+      ],
+      "relevant_excerpts": [
+        "Work Experience:\n\nMachine Learning Engineer at Amazon (2020-2023)\nDeveloped, maintained, and improved production systems. Collaborated with cross-func..."
+      ],
+      "reasoning": "Strong match in work experience. 14+ years experience (required 6+). Meets: 6+ years of software development experience."
+    },
+    {
+      "candidate_name": "Wendy Wang",
+      "resume_path": "data/synthetic_resumes/wendy_wang.json",
+      "match_score": 46,
+      "matched_skills": [
+        "Python",
+        "MySQL"
+      ],
+      "relevant_excerpts": [
+        "Work Experience:\n\nSenior Backend Engineer at Stripe (2022-2024)\nCollaborated with cross-functional teams. Led projects.\n\nMachine Learning Engineer at ..."
+      ],
+      "reasoning": "Strong match in work experience. 8+ years experience (required 6+). Meets: 6+ years of software development experience."
+    },
+    {
+      "candidate_name": "Olivia Miller",
+      "resume_path": "data/synthetic_resumes/olivia_miller.json",
+      "match_score": 46,
+      "matched_skills": [
+        "Terraform",
+        "Spring Boot",
+        "Azure",
+        "PostgreSQL"
+      ],
+      "relevant_excerpts": [
+        "Work Experience:\n\nSenior Backend Engineer at Twitter (2022-2024)\nCollaborated with cross-functional teams. Optimized performance.\n\nSenior Backend Engi..."
+      ],
+      "reasoning": "Strong match in work experience. 15+ years experience (required 6+). Meets: 6+ years of software development experience."
+    },
+    {
+      "candidate_name": "Tina Rodriguez",
+      "resume_path": "data/synthetic_resumes/tina_rodriguez.json",
+      "match_score": 45,
+      "matched_skills": [
+        "AWS",
+        "GitLab CI"
+      ],
+      "relevant_excerpts": [
+        "Work Experience:\n\nFull-Stack Developer at Netflix (2020-2023)\nCollaborated with cross-functional teams. Led projects.\n\nSenior Backend Engineer at Figm..."
+      ],
+      "reasoning": "Strong match in work experience. 15+ years experience (required 6+). Meets: 6+ years of software development experience."
+    },
+    {
+      "candidate_name": "Tina Mueller",
+      "resume_path": "data/synthetic_resumes/tina_mueller.json",
+      "match_score": 45,
+      "matched_skills": [
+        "Python",
+        "CSS",
+        "Svelte",
+        "TypeScript",
+        "PostgreSQL"
+      ],
+      "relevant_excerpts": [
+        "Work Experience:\n\nMachine Learning Engineer at Amazon (2022-2024)\nDeveloped, maintained, and improved production systems. Collaborated with cross-func..."
+      ],
+      "reasoning": "Strong match in work experience. 15+ years experience (required 6+). Meets: 6+ years of software development experience."
+    },
+    {
+      "candidate_name": "Tina O'Brien",
+      "resume_path": "data/synthetic_resumes/tina_o'brien.json",
+      "match_score": 45,
+      "matched_skills": [
+        "Docker",
+        "Jenkins",
+        "GitLab CI"
+      ],
+      "relevant_excerpts": [
+        "Work Experience:\n\nSenior Backend Engineer at Amazon (2022-2024)\nCollaborated with cross-functional teams. Optimized performance.\n\nSenior Backend Engin..."
+      ],
+      "reasoning": "Strong match in work experience. 12+ years experience (required 6+). Meets: 6+ years of software development experience."
+    },
+    {
+      "candidate_name": "Patrick Miller",
+      "resume_path": "data/synthetic_resumes/patrick_miller.json",
+      "match_score": 45,
+      "matched_skills": [
+        "Python",
+        "GCP",
+        "Kubernetes",
+        "Node.js",
+        "MySQL"
+      ],
+      "relevant_excerpts": [
+        "Work Experience:\n\nLead Software Engineer at Netflix (2018-2022)\nDeveloped, maintained, and improved production systems. Collaborated with cross-functi..."
+      ],
+      "reasoning": "Strong match in work experience. 13+ years experience (required 6+). Meets: 6+ years of software development experience."
+    },
+    {
+      "candidate_name": "Eve Kim",
+      "resume_path": "data/synthetic_resumes/eve_kim.json",
+      "match_score": 45,
+      "matched_skills": [
+        "Jenkins",
+        "GCP",
+        "Azure",
+        "Kubernetes"
+      ],
+      "relevant_excerpts": [
+        "Work Experience:\n\nSenior Backend Engineer at Meta (2022-2024)\nCollaborated with cross-functional teams. Optimized performance.\n\nSenior Backend Enginee..."
+      ],
+      "reasoning": "Strong match in work experience. 7+ years experience (required 6+). Meets: 6+ years of software development experience."
+    }
+  ]
+}

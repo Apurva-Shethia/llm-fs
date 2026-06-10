@@ -1,0 +1,43 @@
+{
+  "id": "resume_003",
+  "name": "Bob Kumar",
+  "email": "bob.kumar@email.com",
+  "location": "Denver",
+  "experience_years": 15,
+  "skills": [
+    "Python",
+    "AWS",
+    "Java",
+    "GCP",
+    "Kubernetes",
+    "MySQL",
+    "Django",
+    "GitLab CI"
+  ],
+  "education": [
+    "MS Electrical Engineering"
+  ],
+  "work_history": [
+    {
+      "title": "Machine Learning Engineer",
+      "company": "Uber",
+      "start_year": 2024,
+      "end_year": 2025,
+      "description": "Developed, maintained, and improved production systems. Collaborated with cross-functional teams. Mentored junior engineers."
+    },
+    {
+      "title": "Lead Software Engineer",
+      "company": "Figma",
+      "start_year": 2022,
+      "end_year": 2023,
+      "description": "Collaborated with cross-functional teams. Mentored junior engineers."
+    },
+    {
+      "title": "Senior Backend Engineer",
+      "company": "Apple",
+      "start_year": 2020,
+      "end_year": 2021,
+      "description": "Collaborated with cross-functional teams. Mentored junior engineers."
+    }
+  ]
+}

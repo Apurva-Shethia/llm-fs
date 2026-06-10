@@ -1,0 +1,32 @@
+{
+  "id": "resume_012",
+  "name": "Sam O'Connor",
+  "email": "sam.o'connor@email.com",
+  "location": "Toronto",
+  "experience_years": 7,
+  "skills": [
+    "GCP",
+    "Kubernetes",
+    "GitLab CI"
+  ],
+  "education": [
+    "MS Electrical Engineering",
+    "MS Electrical Engineering"
+  ],
+  "work_history": [
+    {
+      "title": "Senior Backend Engineer",
+      "company": "Netflix",
+      "start_year": 2024,
+      "end_year": 2025,
+      "description": "Collaborated with cross-functional teams. Led projects."
+    },
+    {
+      "title": "Senior Backend Engineer",
+      "company": "Twitter",
+      "start_year": 2022,
+      "end_year": 2023,
+      "description": "Collaborated with cross-functional teams. Optimized performance."
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "id": "resume_029",
+  "name": "Kate Rodriguez",
+  "email": "kate.rodriguez@email.com",
+  "location": "Toronto",
+  "experience_years": 14,
+  "skills": [
+    "Next.js",
+    "Svelte",
+    "Node.js",
+    "PostgreSQL",
+    "React",
+    "MySQL",
+    "Vue.js"
+  ],
+  "education": [
+    "MS Electrical Engineering"
+  ],
+  "work_history": [
+    {
+      "title": "Machine Learning Engineer",
+      "company": "Amazon",
+      "start_year": 2020,
+      "end_year": 2023,
+      "description": "Developed, maintained, and improved production systems. Collaborated with cross-functional teams. Led projects."
+    },
+    {
+      "title": "Full-Stack Developer",
+      "company": "Netflix",
+      "start_year": 2012,
+      "end_year": 2016,
+      "description": "Collaborated with cross-functional teams. Mentored junior engineers."
+    }
+  ]
+}

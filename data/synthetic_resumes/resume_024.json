@@ -1,0 +1,32 @@
+{
+  "id": "resume_024",
+  "name": "Victor O'Connor",
+  "email": "victor.o'connor@email.com",
+  "location": "New York",
+  "experience_years": 5,
+  "skills": [
+    "Go",
+    "FastAPI",
+    "PostgreSQL"
+  ],
+  "education": [
+    "PhD Computer Science",
+    "MS Electrical Engineering"
+  ],
+  "work_history": [
+    {
+      "title": "Senior Backend Engineer",
+      "company": "Microsoft",
+      "start_year": 2024,
+      "end_year": 2025,
+      "description": "Developed, maintained, and improved production systems. Collaborated with cross-functional teams. Mentored junior engineers."
+    },
+    {
+      "title": "Senior Backend Engineer",
+      "company": "DuckDuckGo",
+      "start_year": 2020,
+      "end_year": 2022,
+      "description": "Collaborated with cross-functional teams. Mentored junior engineers."
+    }
+  ]
+}

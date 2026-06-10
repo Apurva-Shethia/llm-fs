@@ -1,0 +1,44 @@
+{
+  "id": "resume_011",
+  "name": "Quinn O'Connor",
+  "email": "quinn.o'connor@email.com",
+  "location": "Denver",
+  "experience_years": 14,
+  "skills": [
+    "Python",
+    "Svelte",
+    "HTML5",
+    "Node.js",
+    "Angular",
+    "PostgreSQL",
+    "React",
+    "FastAPI"
+  ],
+  "education": [
+    "BS Mathematics",
+    "BS Engineering"
+  ],
+  "work_history": [
+    {
+      "title": "Full-Stack Developer",
+      "company": "Apple",
+      "start_year": 2024,
+      "end_year": 2025,
+      "description": "Collaborated with cross-functional teams. Mentored junior engineers."
+    },
+    {
+      "title": "Full-Stack Developer",
+      "company": "Figma",
+      "start_year": 2018,
+      "end_year": 2021,
+      "description": "Developed, maintained, and improved production systems. Collaborated with cross-functional teams. Led projects."
+    },
+    {
+      "title": "Senior Backend Engineer",
+      "company": "Airbnb",
+      "start_year": 2014,
+      "end_year": 2016,
+      "description": "Developed, maintained, and improved production systems. Collaborated with cross-functional teams. Optimized performance."
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "id": "resume_014",
+  "name": "Eve Kim",
+  "email": "eve.kim@email.com",
+  "location": "Chicago",
+  "experience_years": 7,
+  "skills": [
+    "Jenkins",
+    "GCP",
+    "Azure",
+    "Kubernetes"
+  ],
+  "education": [
+    "MS Computer Science"
+  ],
+  "work_history": [
+    {
+      "title": "Senior Backend Engineer",
+      "company": "Meta",
+      "start_year": 2022,
+      "end_year": 2024,
+      "description": "Collaborated with cross-functional teams. Optimized performance."
+    },
+    {
+      "title": "Senior Backend Engineer",
+      "company": "Airbnb",
+      "start_year": 2020,
+      "end_year": 2021,
+      "description": "Developed, maintained, and improved production systems. Collaborated with cross-functional teams. Optimized performance."
+    },
+    {
+      "title": "Full-Stack Developer",
+      "company": "Meta",
+      "start_year": 2018,
+      "end_year": 2019,
+      "description": "Developed, maintained, and improved production systems. Collaborated with cross-functional teams. Mentored junior engineers."
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "id": "resume_022",
+  "name": "Tina O'Brien",
+  "email": "tina.o'brien@email.com",
+  "location": "Berlin",
+  "experience_years": 12,
+  "skills": [
+    "Docker",
+    "Jenkins",
+    "GitLab CI"
+  ],
+  "education": [
+    "MS Electrical Engineering",
+    "BS Mathematics"
+  ],
+  "work_history": [
+    {
+      "title": "Senior Backend Engineer",
+      "company": "Amazon",
+      "start_year": 2022,
+      "end_year": 2024,
+      "description": "Collaborated with cross-functional teams. Optimized performance."
+    },
+    {
+      "title": "Senior Backend Engineer",
+      "company": "Google",
+      "start_year": 2018,
+      "end_year": 2020,
+      "description": "Developed, maintained, and improved production systems. Collaborated with cross-functional teams. Led projects."
+    },
+    {
+      "title": "Senior Backend Engineer",
+      "company": "Google",
+      "start_year": 2012,
+      "end_year": 2015,
+      "description": "Collaborated with cross-functional teams. Optimized performance."
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "id": "resume_019",
+  "name": "Alice Jones",
+  "email": "alice.jones@email.com",
+  "location": "Chicago",
+  "experience_years": 8,
+  "skills": [
+    "NLP",
+    "SQL",
+    "Python"
+  ],
+  "education": [
+    "BS Mathematics",
+    "MS Computer Science"
+  ],
+  "work_history": [
+    {
+      "title": "Senior Backend Engineer",
+      "company": "Canva",
+      "start_year": 2020,
+      "end_year": 2023,
+      "description": "Collaborated with cross-functional teams. Mentored junior engineers."
+    },
+    {
+      "title": "Senior Backend Engineer",
+      "company": "Amazon",
+      "start_year": 2016,
+      "end_year": 2018,
+      "description": "Collaborated with cross-functional teams. Optimized performance."
+    }
+  ]
+}

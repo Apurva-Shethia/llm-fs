@@ -1,0 +1,34 @@
+{
+  "id": "resume_015",
+  "name": "Patrick Miller",
+  "email": "patrick.miller@email.com",
+  "location": "Chicago",
+  "experience_years": 13,
+  "skills": [
+    "Python",
+    "GCP",
+    "Kubernetes",
+    "Node.js",
+    "MySQL"
+  ],
+  "education": [
+    "PhD Computer Science",
+    "BS Mathematics"
+  ],
+  "work_history": [
+    {
+      "title": "Lead Software Engineer",
+      "company": "Netflix",
+      "start_year": 2018,
+      "end_year": 2022,
+      "description": "Developed, maintained, and improved production systems. Collaborated with cross-functional teams. Optimized performance."
+    },
+    {
+      "title": "Senior Backend Engineer",
+      "company": "Amazon",
+      "start_year": 2016,
+      "end_year": 2017,
+      "description": "Collaborated with cross-functional teams. Optimized performance."
+    }
+  ]
+}

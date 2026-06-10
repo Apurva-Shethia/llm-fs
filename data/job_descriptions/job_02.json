@@ -1,0 +1,20 @@
+{
+  "id": "jd_02",
+  "title": "Software Engineer II",
+  "company": "Uber",
+  "description": "We are looking for a talented Software Engineer II to join our team at Uber. \nIn this role, you will work on cutting-edge frontend applications.\nYou will collaborate with experienced engineers and have the opportunity to grow your skills.",
+  "required_skills": [
+    "Spring Boot",
+    "FastAPI"
+  ],
+  "must_haves": [
+    "6+ years of software development experience",
+    "Strong problem-solving skills"
+  ],
+  "nice_to_haves": [
+    "Experience with FastAPI",
+    "Performance optimization experience"
+  ],
+  "min_years_experience": 6,
+  "location": "Los Angeles"
+}

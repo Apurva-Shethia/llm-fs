@@ -1,0 +1,21 @@
+{
+  "id": "jd_03",
+  "title": "Software Engineer II",
+  "company": "Google",
+  "description": "We are looking for a talented Software Engineer II to join our team at Google. \nIn this role, you will work on ML infrastructure.\nYou will collaborate with experienced engineers and have the opportunity to grow your skills.",
+  "required_skills": [
+    "Django",
+    "FastAPI"
+  ],
+  "must_haves": [
+    "5+ years of software development experience",
+    "Experience with Django"
+  ],
+  "nice_to_haves": [
+    "Performance optimization experience",
+    "Experience in agile environments",
+    "Mentoring junior engineers"
+  ],
+  "min_years_experience": 5,
+  "location": "San Francisco"
+}

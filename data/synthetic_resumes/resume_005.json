@@ -1,0 +1,25 @@
+{
+  "id": "resume_005",
+  "name": "Maya Mueller",
+  "email": "maya.mueller@email.com",
+  "location": "London",
+  "experience_years": 3,
+  "skills": [
+    "SQL",
+    "Pandas",
+    "NLP",
+    "Computer Vision"
+  ],
+  "education": [
+    "BS Physics"
+  ],
+  "work_history": [
+    {
+      "title": "Full-Stack Developer",
+      "company": "Notion",
+      "start_year": 2020,
+      "end_year": 2023,
+      "description": "Developed, maintained, and improved production systems. Collaborated with cross-functional teams. Optimized performance."
+    }
+  ]
+}

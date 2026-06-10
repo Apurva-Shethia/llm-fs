@@ -1,0 +1,25 @@
+{
+  "id": "resume_017",
+  "name": "Wendy Mueller",
+  "email": "wendy.mueller@email.com",
+  "location": "Boston",
+  "experience_years": 1,
+  "skills": [
+    "Docker",
+    "Node.js",
+    "FastAPI",
+    "GitLab CI"
+  ],
+  "education": [
+    "BS Engineering"
+  ],
+  "work_history": [
+    {
+      "title": "Lead Software Engineer",
+      "company": "Figma",
+      "start_year": 2024,
+      "end_year": 2025,
+      "description": "Collaborated with cross-functional teams. Mentored junior engineers."
+    }
+  ]
+}

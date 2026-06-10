@@ -1,0 +1,38 @@
+{
+  "id": "resume_002",
+  "name": "Wendy Smith",
+  "email": "wendy.smith@email.com",
+  "location": "Berlin",
+  "experience_years": 15,
+  "skills": [
+    "SQL",
+    "Computer Vision"
+  ],
+  "education": [
+    "BS Mathematics",
+    "BS Mathematics"
+  ],
+  "work_history": [
+    {
+      "title": "Senior Backend Engineer",
+      "company": "Figma",
+      "start_year": 2024,
+      "end_year": 2025,
+      "description": "Developed, maintained, and improved production systems. Collaborated with cross-functional teams. Mentored junior engineers."
+    },
+    {
+      "title": "Data Scientist",
+      "company": "Google",
+      "start_year": 2016,
+      "end_year": 2020,
+      "description": "Collaborated with cross-functional teams. Optimized performance."
+    },
+    {
+      "title": "Machine Learning Engineer",
+      "company": "Canva",
+      "start_year": 2008,
+      "end_year": 2012,
+      "description": "Collaborated with cross-functional teams. Mentored junior engineers."
+    }
+  ]
+}

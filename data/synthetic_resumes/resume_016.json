@@ -1,0 +1,27 @@
+{
+  "id": "resume_016",
+  "name": "Tina Chen",
+  "email": "tina.chen@email.com",
+  "location": "Boston",
+  "experience_years": 5,
+  "skills": [
+    "Docker",
+    "Python",
+    "Kubernetes",
+    "Spring Boot",
+    "Azure"
+  ],
+  "education": [
+    "PhD Computer Science",
+    "MS Electrical Engineering"
+  ],
+  "work_history": [
+    {
+      "title": "Lead Software Engineer",
+      "company": "Notion",
+      "start_year": 2018,
+      "end_year": 2022,
+      "description": "Collaborated with cross-functional teams. Led projects."
+    }
+  ]
+}

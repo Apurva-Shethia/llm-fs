@@ -1,3 +1,16 @@
 .venv/
-samples/
+venv/
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
 .env
+.DS_Store
+
+# Generated artifacts
+data/chroma_db/
+data/matching_results.json
+data/performance_report.txt
+data/matching_metrics.png
+
+# Keep the sample source files out of version control noise
+samples/

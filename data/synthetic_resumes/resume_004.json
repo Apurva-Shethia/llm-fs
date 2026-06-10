@@ -1,0 +1,37 @@
+{
+  "id": "resume_004",
+  "name": "Tina Rodriguez",
+  "email": "tina.rodriguez@email.com",
+  "location": "Boston",
+  "experience_years": 15,
+  "skills": [
+    "AWS",
+    "GitLab CI"
+  ],
+  "education": [
+    "MS Data Science"
+  ],
+  "work_history": [
+    {
+      "title": "Full-Stack Developer",
+      "company": "Netflix",
+      "start_year": 2020,
+      "end_year": 2023,
+      "description": "Collaborated with cross-functional teams. Led projects."
+    },
+    {
+      "title": "Senior Backend Engineer",
+      "company": "Figma",
+      "start_year": 2012,
+      "end_year": 2016,
+      "description": "Collaborated with cross-functional teams. Mentored junior engineers."
+    },
+    {
+      "title": "Machine Learning Engineer",
+      "company": "Airbnb",
+      "start_year": 2010,
+      "end_year": 2011,
+      "description": "Collaborated with cross-functional teams. Led projects."
+    }
+  ]
+}

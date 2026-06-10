@@ -1,0 +1,24 @@
+{
+  "id": "resume_007",
+  "name": "Bob Kumar",
+  "email": "bob.kumar@email.com",
+  "location": "Singapore",
+  "experience_years": 7,
+  "skills": [
+    "Python",
+    "Spark"
+  ],
+  "education": [
+    "MS Computer Science",
+    "BS Physics"
+  ],
+  "work_history": [
+    {
+      "title": "Senior Backend Engineer",
+      "company": "Apple",
+      "start_year": 2018,
+      "end_year": 2022,
+      "description": "Developed, maintained, and improved production systems. Collaborated with cross-functional teams. Mentored junior engineers."
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "id": "jd_05",
+  "title": "Data Engineer",
+  "company": "Airbnb",
+  "description": "We are looking for a talented Data Engineer to join our team at Airbnb. \nIn this role, you will work on cutting-edge frontend applications.\nYou will collaborate with experienced engineers and have the opportunity to grow your skills.",
+  "required_skills": [
+    "R",
+    "Spark",
+    "ETL"
+  ],
+  "must_haves": [
+    "2+ years of software development experience",
+    "Experience with ETL"
+  ],
+  "nice_to_haves": [
+    "Experience in agile environments"
+  ],
+  "min_years_experience": 2,
+  "location": "Austin"
+}

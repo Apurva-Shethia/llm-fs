@@ -1,0 +1,32 @@
+{
+  "id": "resume_023",
+  "name": "Bob Kim",
+  "email": "bob.kim@email.com",
+  "location": "Chicago",
+  "experience_years": 14,
+  "skills": [
+    "Next.js",
+    "React",
+    "HTML5",
+    "Vue.js"
+  ],
+  "education": [
+    "MS Computer Science"
+  ],
+  "work_history": [
+    {
+      "title": "Full-Stack Developer",
+      "company": "Notion",
+      "start_year": 2024,
+      "end_year": 2025,
+      "description": "Developed, maintained, and improved production systems. Collaborated with cross-functional teams. Optimized performance."
+    },
+    {
+      "title": "Frontend Engineer",
+      "company": "DuckDuckGo",
+      "start_year": 2020,
+      "end_year": 2022,
+      "description": "Collaborated with cross-functional teams. Mentored junior engineers."
+    }
+  ]
+}

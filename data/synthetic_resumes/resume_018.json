@@ -1,0 +1,32 @@
+{
+  "id": "resume_018",
+  "name": "Uma Rodriguez",
+  "email": "uma.rodriguez@email.com",
+  "location": "Chicago",
+  "experience_years": 4,
+  "skills": [
+    "Node.js",
+    "Spring Boot",
+    "MySQL",
+    "FastAPI"
+  ],
+  "education": [
+    "BS Physics"
+  ],
+  "work_history": [
+    {
+      "title": "Senior Backend Engineer",
+      "company": "Stripe",
+      "start_year": 2024,
+      "end_year": 2025,
+      "description": "Developed, maintained, and improved production systems. Collaborated with cross-functional teams. Mentored junior engineers."
+    },
+    {
+      "title": "Senior Backend Engineer",
+      "company": "Figma",
+      "start_year": 2022,
+      "end_year": 2023,
+      "description": "Collaborated with cross-functional teams. Led projects."
+    }
+  ]
+}

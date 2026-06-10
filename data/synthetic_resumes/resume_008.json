@@ -1,0 +1,29 @@
+{
+  "id": "resume_008",
+  "name": "Victor Chen",
+  "email": "victor.chen@email.com",
+  "location": "Austin",
+  "experience_years": 3,
+  "skills": [
+    "Docker",
+    "Go",
+    "Python",
+    "GCP",
+    "PostgreSQL",
+    "Azure",
+    "GitLab CI"
+  ],
+  "education": [
+    "MS Electrical Engineering",
+    "BS Engineering"
+  ],
+  "work_history": [
+    {
+      "title": "Full-Stack Developer",
+      "company": "Apple",
+      "start_year": 2022,
+      "end_year": 2024,
+      "description": "Developed, maintained, and improved production systems. Collaborated with cross-functional teams. Led projects."
+    }
+  ]
+}

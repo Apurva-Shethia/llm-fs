@@ -1,0 +1,31 @@
+{
+  "id": "resume_021",
+  "name": "Quinn O'Connor",
+  "email": "quinn.o'connor@email.com",
+  "location": "London",
+  "experience_years": 3,
+  "skills": [
+    "PyTorch",
+    "Machine Learning",
+    "Scikit-learn"
+  ],
+  "education": [
+    "BS Engineering"
+  ],
+  "work_history": [
+    {
+      "title": "Machine Learning Engineer",
+      "company": "Stripe",
+      "start_year": 2024,
+      "end_year": 2025,
+      "description": "Collaborated with cross-functional teams. Mentored junior engineers."
+    },
+    {
+      "title": "Machine Learning Engineer",
+      "company": "Apple",
+      "start_year": 2022,
+      "end_year": 2023,
+      "description": "Developed, maintained, and improved production systems. Collaborated with cross-functional teams. Led projects."
+    }
+  ]
+}

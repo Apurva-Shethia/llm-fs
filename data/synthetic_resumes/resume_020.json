@@ -1,0 +1,24 @@
+{
+  "id": "resume_020",
+  "name": "Henry Williams",
+  "email": "henry.williams@email.com",
+  "location": "Berlin",
+  "experience_years": 1,
+  "skills": [
+    "Next.js",
+    "Angular",
+    "Vue.js"
+  ],
+  "education": [
+    "MS Computer Science"
+  ],
+  "work_history": [
+    {
+      "title": "Frontend Engineer",
+      "company": "Google",
+      "start_year": 2024,
+      "end_year": 2025,
+      "description": "Developed, maintained, and improved production systems. Collaborated with cross-functional teams. Mentored junior engineers."
+    }
+  ]
+}

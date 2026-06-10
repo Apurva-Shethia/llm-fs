@@ -1,0 +1,23 @@
+{
+  "id": "jd_04",
+  "title": "Platform Engineer",
+  "company": "Airbnb",
+  "description": "We are looking for a talented Platform Engineer to join our team at Airbnb. \nIn this role, you will work on cutting-edge frontend applications.\nYou will collaborate with experienced engineers and have the opportunity to grow your skills.",
+  "required_skills": [
+    "GCP",
+    "Kubernetes",
+    "Node.js",
+    "Azure",
+    "FastAPI"
+  ],
+  "must_haves": [
+    "5+ years of software development experience",
+    "Experience with GCP",
+    "Strong problem-solving skills"
+  ],
+  "nice_to_haves": [
+    "Experience with Azure"
+  ],
+  "min_years_experience": 5,
+  "location": "Boston"
+}

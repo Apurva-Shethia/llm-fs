@@ -1,0 +1,23 @@
+{
+  "id": "resume_009",
+  "name": "Alice Rodriguez",
+  "email": "alice.rodriguez@email.com",
+  "location": "Berlin",
+  "experience_years": 3,
+  "skills": [
+    "NLP",
+    "Computer Vision"
+  ],
+  "education": [
+    "MS Data Science"
+  ],
+  "work_history": [
+    {
+      "title": "Senior Backend Engineer",
+      "company": "Airbnb",
+      "start_year": 2020,
+      "end_year": 2023,
+      "description": "Collaborated with cross-functional teams. Mentored junior engineers."
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "id": "resume_030",
+  "name": "Diana Rodriguez",
+  "email": "diana.rodriguez@email.com",
+  "location": "San Francisco",
+  "experience_years": 1,
+  "skills": [
+    "AWS",
+    "Terraform",
+    "Kubernetes",
+    "GitLab CI"
+  ],
+  "education": [
+    "PhD Computer Science"
+  ],
+  "work_history": [
+    {
+      "title": "Machine Learning Engineer",
+      "company": "Canva",
+      "start_year": 2024,
+      "end_year": 2025,
+      "description": "Collaborated with cross-functional teams. Optimized performance."
+    }
+  ]
+}

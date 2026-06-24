@@ -1,3 +1,5 @@
+WIP PR, adding new code..
+
 # LLM Resume Assistant & RAG Matching System
 
 Python project for resume file operations via LLM tool-calling, plus a semantic search pipeline that matches candidates to job descriptions using Gemini embeddings and ChromaDB.

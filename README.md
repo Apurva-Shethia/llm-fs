@@ -1,32 +1,41 @@
-WIP PR, adding new code..
+# LLM Resume Assistant, RAG Matching & LangGraph Agent
 
-# LLM Resume Assistant & RAG Matching System
-
-Python project for resume file operations via LLM tool-calling, plus a semantic search pipeline that matches candidates to job descriptions using Gemini embeddings and ChromaDB.
+Python project for resume file operations via LLM tool-calling, a semantic search pipeline that matches candidates to job descriptions using Gemini embeddings and ChromaDB, and a LangGraph-based conversational matching agent with multi-round screening and a human-in-the-loop feedback loop.
 
 ## Features
 
-### LLM File Assistant
+### LLM File Assistant (Milestone 1)
 - Read resume files (TXT, PDF, DOCX) with metadata
 - List and search files within a configurable base directory
 - Write files with atomic writes and overwrite protection
 - Multi-step LLM tool-calling for natural language tasks
 
-### RAG Resume Matching
+### RAG Resume Matching (Milestone 2)
 - Section-aware resume chunking (basics, education, work experience)
 - Gemini embedding generation with retry on rate limits
 - ChromaDB vector storage at `data/chroma_db/`
 - Hybrid matching: 70% semantic similarity + 30% keyword/requirement boost
 - JSON output with match scores, matched skills, excerpts, and reasoning
 
+### LangGraph Matching Agent (Milestone 3)
+- Conversational interface accepting natural language queries
+- Stateful graph tracking conversation history, requirements, shortlist, and ranking snapshots
+- Multi-round screening: broad search (top 10) -> deep analysis -> hire/no-hire recommendation
+- Human-in-the-loop feedback loop using LangGraph `interrupt()` for iterative refinement
+- Explainability: detailed match reports with strengths, gaps, and improvement suggestions for borderline candidates
+- Agent tools: `rag_search`, `extract_requirements`, `compare_candidates`, `generate_interview_questions`, plus Milestone 1 file tools
+
 ## Project Structure
 
 ```
 llm-fs/
-├── fs_tools.py              # File system tools (read, list, search, write)
-├── llm_file_assistant.py    # LLM tool-calling assistant and CLI
-├── resume_rag.py            # Chunking, embeddings, ChromaDB vector store
-├── job_matcher.py           # Semantic and hybrid resume-to-job matching
+├── fs_tools.py              # Milestone 1: File system tools (read, list, search, write)
+├── llm_file_assistant.py    # Milestone 1: LLM tool-calling assistant and CLI
+├── resume_rag.py            # Milestone 2: Chunking, embeddings, ChromaDB vector store
+├── job_matcher.py           # Milestone 2: Semantic and hybrid resume-to-job matching
+├── agent_tools.py           # Milestone 3: Tool layer (RAG search, requirements, compare, questions)
+├── matching_agent.py        # Milestone 3: LangGraph agent (state, nodes, graph)
+├── chat_interface.py        # Milestone 3: CLI chat with demo scenarios
 ├── data_generator.py        # Synthetic resume and job description data
 ├── example_usage.py         # End-to-end usage demo
 ├── analysis.ipynb           # Metrics, latency analysis, visualizations
@@ -72,8 +81,11 @@ cp .env.example .env
 | `FILE_ASSISTANT_MAX_BYTES` | Max file size for reads. Default: `5000000` |
 | `FILE_ASSISTANT_MAX_CHARS` | Max characters returned by `read_file`. Default: `200000` |
 | `LLM_TOOL_MAX_CALLS` | Max tool-call iterations per query. Default: `6` |
+| `MATCHING_AGENT_RESUME_DIR` | Resume directory for the agent. Default: `data/synthetic_resumes` |
+| `MATCHING_AGENT_JD_DIR` | Job description directory for the agent. Default: `data/job_descriptions` |
+| `MATCHING_AGENT_CHROMA_DIR` | Vector store directory for the agent. Default: `data/chroma_db` |
 
-The CLI and RAG modules load `.env` automatically on startup.
+All entry points (CLI, RAG modules, and the LangGraph agent) load `.env` automatically on startup, so `export` is not required when a `.env` file is present.
 
 ## Usage
 
@@ -109,6 +121,34 @@ Generate fresh synthetic data:
 venv/bin/python data_generator.py
 ```
 
+### LangGraph Matching Agent
+
+Interactive conversational chat:
+
+```bash
+venv/bin/python chat_interface.py
+```
+
+Run the built-in demo conversation flows:
+
+```bash
+venv/bin/python chat_interface.py --demo            # all 5 scenarios
+venv/bin/python chat_interface.py --scenario 1      # a single scenario
+venv/bin/python chat_interface.py --list-scenarios  # list scenarios
+```
+
+Example queries:
+
+```
+Match candidates for data/job_descriptions/job_01.json
+Find me candidates with React and 3+ years experience
+Compare the top 3 matches side by side
+Why did the top candidate rank higher than the second candidate?
+Generate screening interview questions for the top candidate
+```
+
+During the human feedback loop you can refine requirements (e.g. `prioritize TensorFlow over backend skills`), advance to deep screening (`next round`), or finish (`done`).
+
 ### Analysis
 
 ```bash
@@ -136,6 +176,45 @@ Matching Layer (job_matcher.py)
 Output Layer
 └─ JSON with match scores, skills, excerpts, reasoning
 ```
+
+## Agent State Machine (Milestone 3)
+
+The LangGraph agent routes each user message by intent, then runs the matching workflow with a human feedback loop and multi-round screening.
+
+```mermaid
+flowchart TD
+    START([START]) --> route_intent
+    route_intent -->|match| parse_jd
+    route_intent -->|compare| compare_candidates_node
+    route_intent -->|explain| explain_ranking_node
+    route_intent -->|questions| generate_questions_node
+    route_intent -->|refine| process_feedback
+
+    parse_jd --> extract_requirements
+    extract_requirements --> search_resumes
+    search_resumes --> rank_candidates
+    rank_candidates --> generate_report
+    generate_report --> human_feedback
+    human_feedback -->|refine| process_feedback
+    human_feedback -->|next round| multi_round
+    human_feedback -->|done| endNode
+    process_feedback --> search_resumes
+    multi_round --> final_recommendation
+    final_recommendation --> endNode([END])
+    compare_candidates_node --> endNode
+    explain_ranking_node --> endNode
+    generate_questions_node --> endNode
+```
+
+State tracked in `AgentState` (`matching_agent.py`): conversation `messages`, parsed `jd`, structured `requirements`, `all_candidates`, `shortlist`, `final_candidates`, `screening_round`, generated `report`, `feedback`, and `rankings_history` (per-round snapshots used for ranking explanations).
+
+### Multi-Round Screening
+
+| Round | Input | Action | Output |
+|-------|-------|--------|--------|
+| 1 | All resumes | RAG hybrid search + rank | Top 10 candidates |
+| 2 | Top 10 | Deep analysis (re-reads resume files) | Top 3-5 with gap analysis |
+| 3 | Top 3-5 | Final assessment | Hire / No-hire per candidate |
 
 ## Output Format
 
@@ -165,9 +244,12 @@ Output Layer
 ## Configuration
 
 - **Chunking**: Edit `ResumeChunker` in `resume_rag.py`
-- **Embedding model**: `EmbeddingService(model="text-embedding-004")` in `resume_rag.py`
+- **Embedding model**: `EmbeddingService(model="gemini-embedding-001")` in `resume_rag.py`
 - **Hybrid weights**: Adjust semantic/keyword ratio in `hybrid_search()` in `job_matcher.py`
 - **Top-K results**: `matcher.match_candidates(jd, top_k=10)` in `job_matcher.py`
+- **Agent model**: `ChatGoogleGenerativeAI(model=...)` via `GEMINI_MODEL`, used in `matching_agent.py` and `agent_tools.py`
+- **Round sizing**: Top-k per screening round in `search_resumes_node` / `rank_candidates_node` in `matching_agent.py`
+- **Demo scenarios**: Edit `DEMO_SCENARIOS` in `chat_interface.py`
 
 ## Troubleshooting
 
@@ -188,4 +270,4 @@ venv/bin/python resume_rag.py
 
 ## Dependencies
 
-Core packages: `google-genai`, `chromadb`, `numpy`, `PyPDF2`, `python-docx`, `python-dotenv`. See `requirements.txt` for versions.
+Core packages: `google-genai`, `chromadb`, `numpy`, `PyPDF2`, `python-docx`, `python-dotenv`. The LangGraph agent adds `langgraph`, `langchain-google-genai`, and `langchain-core`. See `requirements.txt` for versions.

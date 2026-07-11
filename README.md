@@ -36,6 +36,10 @@ llm-fs/
 ├── agent_tools.py           # Milestone 3: Tool layer (RAG search, requirements, compare, questions)
 ├── matching_agent.py        # Milestone 3: LangGraph agent (state, nodes, graph)
 ├── chat_interface.py        # Milestone 3: CLI chat with demo scenarios
+├── filesystem_mcp_server.py # Milestone 4: MCP server exposing all file tools + watch/batch
+├── web_search_mcp_server.py # Milestone 4 (bonus): Mock web-search MCP server
+├── mcp_client.py            # Milestone 4: Async MCP client + sync manager for agents
+├── test_mcp.py              # Milestone 4: MCP test scenarios (7 scenario classes)
 ├── data_generator.py        # Synthetic resume and job description data
 ├── example_usage.py         # End-to-end usage demo
 ├── analysis.ipynb           # Metrics, latency analysis, visualizations
@@ -84,6 +88,13 @@ cp .env.example .env
 | `MATCHING_AGENT_RESUME_DIR` | Resume directory for the agent. Default: `data/synthetic_resumes` |
 | `MATCHING_AGENT_JD_DIR` | Job description directory for the agent. Default: `data/job_descriptions` |
 | `MATCHING_AGENT_CHROMA_DIR` | Vector store directory for the agent. Default: `data/chroma_db` |
+| `MCP_TRANSPORT` | MCP server transport: `stdio` (default) or `streamable-http` |
+| `MCP_HOST` | Host for HTTP transport. Default: `127.0.0.1` |
+| `MCP_PORT` | Port for HTTP transport. Default: `8765` |
+| `MCP_FILESYSTEM_SERVER` | Absolute path to `filesystem_mcp_server.py`. Default: auto-detected |
+| `MCP_WEB_SEARCH_SERVER` | Absolute path to `web_search_mcp_server.py`. Default: auto-detected |
+| `MCP_ENABLE_WEB_SEARCH` | Set to `1` to enable the web-search MCP server in the agent. Default: `0` |
+| `MCP_WATCH_POLL_INTERVAL` | Polling interval (seconds) for `watch_directory`. Default: `1.0` |
 
 All entry points (CLI, RAG modules, and the LangGraph agent) load `.env` automatically on startup, so `export` is not required when a `.env` file is present.
 
@@ -121,6 +132,47 @@ Generate fresh synthetic data:
 venv/bin/python data_generator.py
 ```
 
+### MCP Server (Milestone 4)
+
+The filesystem MCP server exposes all Milestone 1 file tools plus `watch_directory` and `batch_process` over the Model Context Protocol (JSON-RPC 2.0).
+
+**stdio transport (default — used by the LangGraph agent):**
+```bash
+venv/bin/python filesystem_mcp_server.py
+```
+
+**HTTP transport (for remote or multi-client use):**
+```bash
+MCP_TRANSPORT=streamable-http MCP_PORT=8765 venv/bin/python filesystem_mcp_server.py
+```
+
+**Enable web-search MCP server alongside the filesystem server:**
+```bash
+MCP_ENABLE_WEB_SEARCH=1 venv/bin/python chat_interface.py
+```
+
+The agent connects automatically — the MCP client spawns the server as a subprocess on first tool call.
+
+**MCP tools exposed:**
+
+| Tool | Description |
+|------|-------------|
+| `read_file` | Read TXT / PDF / DOCX / JSON with metadata |
+| `list_files` | List directory contents filtered by extension |
+| `write_file` | Atomic write with overwrite protection |
+| `search_in_file` | Keyword search with context snippets |
+| `watch_directory` | Poll for new / modified / deleted files |
+| `batch_process` | Run multiple read/search/list ops in one request |
+| `get_config` | Return current runtime configuration |
+| `update_config` | Override runtime limits for this session |
+
+**MCP resources exposed:**
+
+| URI | Description |
+|-----|-------------|
+| `filesystem://config` | Server configuration as JSON |
+| `file://{relative_path}` | Read any file as an MCP resource |
+
 ### LangGraph Matching Agent
 
 Interactive conversational chat:
@@ -149,6 +201,18 @@ Generate screening interview questions for the top candidate
 
 During the human feedback loop you can refine requirements (e.g. `prioritize TensorFlow over backend skills`), advance to deep screening (`next round`), or finish (`done`).
 
+### Running Tests
+
+```bash
+# Run all MCP test scenarios (7 scenario classes, ~20 tests)
+venv/bin/python test_mcp.py
+
+# Or via unittest discovery
+venv/bin/python -m unittest test_mcp -v
+```
+
+The test suite covers: resource discovery, core filesystem tool calls, batch_process, watch_directory change detection, multi-MCP web-search server, agent-level MCP integration, and JSON-RPC error codes.
+
 ### Analysis
 
 ```bash
@@ -176,6 +240,69 @@ Matching Layer (job_matcher.py)
 Output Layer
 └─ JSON with match scores, skills, excerpts, reasoning
 ```
+
+## Agent ↔ MCP Interaction
+
+The diagram below shows how the LangGraph agent communicates with MCP servers over JSON-RPC 2.0. Each agent node that needs file access calls `agent_tools._mcp_call()`, which routes to the appropriate MCP server subprocess via `mcp_client.MCPClientManager`.
+
+```mermaid
+sequenceDiagram
+    participant UI as chat_interface.py
+    participant AG as matching_agent.py<br/>(LangGraph)
+    participant AT as agent_tools.py
+    participant MC as mcp_client.py<br/>(MCPClientManager)
+    participant FS as filesystem_mcp_server.py<br/>(stdio subprocess)
+    participant WS as web_search_mcp_server.py<br/>(stdio subprocess, optional)
+
+    UI->>AG: user query (HumanMessage)
+    AG->>AG: route_intent node
+    AG->>AG: parse_jd node
+    AG->>AT: extract_requirements(jd_text)
+    AG->>AG: search_resumes node
+    AG->>AT: rag_search(query, top_k, jd)
+    note over AT: RAG runs locally (ChromaDB)
+
+    AG->>AG: multi_round node (Round 2)
+    AG->>AT: read_resume_file(path)
+    AT->>MC: _mcp_call("read_file", {filepath})
+    MC->>FS: JSON-RPC 2.0 call_tool("read_file")
+    FS-->>MC: {success, content, metadata}
+    MC-->>AT: parsed result dict
+    AT-->>AG: resume content
+
+    AG->>AT: list_resume_files(directory)
+    AT->>MC: _mcp_call("list_files", {directory, extension})
+    MC->>FS: JSON-RPC 2.0 call_tool("list_files")
+    FS-->>MC: {success, files, count}
+    MC-->>AT: file list
+
+    opt MCP_ENABLE_WEB_SEARCH=1
+        AG->>AT: enrich context for skills
+        AT->>MC: _mcp_call("web_search", {query}, server="web_search")
+        MC->>WS: JSON-RPC 2.0 call_tool("web_search")
+        WS-->>MC: {success, results}
+        MC-->>AT: skill market context
+    end
+
+    AG->>AG: generate_report node
+    AG->>AG: human_feedback node (interrupt)
+    AG-->>UI: report + feedback prompt
+    UI->>AG: recruiter feedback
+    AG->>AG: process_feedback → search_resumes → ...
+    AG->>AG: final_recommendation node
+    AG-->>UI: hire / no-hire decisions
+```
+
+### MCP Tool Usage by Agent Node
+
+| Agent Node | MCP Tool Called | Server |
+|---|---|---|
+| `multi_round_node` | `read_file` | filesystem |
+| `list_resume_files` (helper) | `list_files` | filesystem |
+| `read_resume_file` (helper) | `read_file` | filesystem |
+| `watch_directory` (standalone) | `watch_directory` | filesystem |
+| `batch_process` (standalone) | `batch_process` | filesystem |
+| (bonus) skill enrichment | `web_search` / `enrich_skill_context` | web_search |
 
 ## Agent State Machine (Milestone 3)
 

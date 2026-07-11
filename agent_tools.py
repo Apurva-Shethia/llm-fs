@@ -1,6 +1,7 @@
 """
 Agent tools for the LangGraph matching agent.
-Wraps Milestone 1 file tools and Milestone 2 RAG/matching capabilities.
+Wraps Milestone 2 RAG/matching capabilities and routes Milestone 1 file
+operations through the filesystem MCP server.
 """
 
 from __future__ import annotations
@@ -15,8 +16,8 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-from fs_tools import list_files, read_file
 from job_matcher import JobMatcher, load_job_descriptions
+from mcp_client import get_mcp_manager
 from resume_rag import ResumeVectorDB, load_resumes_from_files
 
 DEFAULT_RESUME_DIR = os.getenv("MATCHING_AGENT_RESUME_DIR", "data/synthetic_resumes")
@@ -28,6 +29,22 @@ _RESUME_INDEX: Dict[str, Dict[str, Any]] = {}
 _RESUME_BY_NAME: Dict[str, Dict[str, Any]] = {}
 _VECTOR_DB: Optional[ResumeVectorDB] = None
 _JOB_MATCHER: Optional[JobMatcher] = None
+_MCP_INITIALIZED = False
+
+
+def _ensure_mcp() -> None:
+    """Initialize MCP client connections on first use."""
+    global _MCP_INITIALIZED
+    if _MCP_INITIALIZED:
+        return
+    enable_web = os.getenv("MCP_ENABLE_WEB_SEARCH", "0") == "1"
+    get_mcp_manager(enable_filesystem=True, enable_web_search=enable_web)
+    _MCP_INITIALIZED = True
+
+
+def _mcp_call(tool_name: str, arguments: Dict[str, Any], server: str = "filesystem") -> Dict[str, Any]:
+    _ensure_mcp()
+    return get_mcp_manager().call_tool(tool_name, arguments, server=server)
 
 
 def _normalize_key(value: str) -> str:
@@ -105,13 +122,13 @@ def _parse_json_response(text: str) -> Dict[str, Any]:
 
 
 def list_resume_files(directory: str = DEFAULT_RESUME_DIR) -> Dict[str, Any]:
-    """List resume files in a directory."""
-    return {"success": True, "result": list_files(directory=directory, extension=".json")}
+    """List resume files in a directory via the filesystem MCP server."""
+    return _mcp_call("list_files", {"directory": directory, "extension": ".json"})
 
 
 def read_resume_file(filepath: str) -> Dict[str, Any]:
-    """Read a resume file using Milestone 1 file tools."""
-    return read_file(filepath)
+    """Read a resume file via the filesystem MCP server."""
+    return _mcp_call("read_file", {"filepath": filepath})
 
 
 def rag_search(

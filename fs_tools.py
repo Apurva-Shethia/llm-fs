@@ -143,7 +143,7 @@ def read_file(filepath: str) -> Dict[str, object]:  # Read a resume file and ret
 
     try:  # Attempt to read based on file extension.
         ext = path.suffix.lower()  # Normalize the extension for comparison.
-        if ext == ".txt":  # Handle text files.
+        if ext in (".txt", ".json"):  # Handle text and JSON files.
             content = _read_txt(path)  # Read text content.
         elif ext == ".pdf":  # Handle PDF files.
             content = _read_pdf(path)  # Extract PDF text.
@@ -242,7 +242,7 @@ def search_in_file(filepath: str, keyword: str) -> Dict[str, object]:  # Search 
 
     try:  # Attempt to read based on file extension.
         ext = path.suffix.lower()  # Normalize the extension for comparison.
-        if ext == ".txt":  # Handle text files.
+        if ext in (".txt", ".json"):  # Handle text and JSON files.
             content = _read_txt(path)  # Read text content.
         elif ext == ".pdf":  # Handle PDF files.
             content = _read_pdf(path)  # Extract PDF text.
